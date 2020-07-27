@@ -39,6 +39,7 @@ func TestStageCreate(t *testing.T) {
 		expectReadStageShow(mock)
 		err := resources.CreateStage(d, db)
 		r.NoError(err)
+		r.Equal("arn:aws:my-notification-channel", d.Get("notification_channel"))
 	})
 }
 
@@ -54,6 +55,6 @@ func expectReadStage(mock sqlmock.Sqlmock) {
 func expectReadStageShow(mock sqlmock.Sqlmock) {
 	rows := sqlmock.NewRows([]string{
 		"created_on", "name", "database_name", "schema_name", "url", "has_credentials", "has_encryption_key", "owner", "comment", "region", "type", "cloud", "notification_channel", "storage_integration"},
-	).AddRow("2019-12-23 17:20:50.088 +0000", "test_stage", "test_db", "test_schema", "s3://load/test/", "N", "Y", "test", "great comment", "us-east-1", "EXTERNAL", "AWS", "NULL", "NULL")
+	).AddRow("2019-12-23 17:20:50.088 +0000", "test_stage", "test_db", "test_schema", "s3://load/test/", "N", "Y", "test", "great comment", "us-east-1", "EXTERNAL", "AWS", "arn:aws:my-notification-channel", "NULL")
 	mock.ExpectQuery(`^SHOW STAGES LIKE 'test_stage' IN DATABASE "test_db"$`).WillReturnRows(rows)
 }

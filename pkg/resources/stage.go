@@ -81,6 +81,11 @@ var stageSchema = map[string]*schema.Schema{
 		Optional: true,
 		Computed: true,
 	},
+	"notification_channel": &schema.Schema{
+		Type:        schema.TypeString,
+		Optional:    true,
+		Description: "The stage notification channel.",
+	},
 }
 
 type stageID struct {
@@ -257,6 +262,11 @@ func ReadStage(data *schema.ResourceData, meta interface{}) error {
 	}
 
 	err = data.Set("copy_options", stageDesc.CopyOptions)
+	if err != nil {
+		return err
+	}
+
+	err = data.Set("notification_channel", s.NotificationChannel)
 	if err != nil {
 		return err
 	}

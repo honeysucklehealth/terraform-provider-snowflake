@@ -19,4 +19,5 @@ require (
 	github.com/stretchr/testify v1.5.1
 	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
 	golang.org/x/crypto v0.0.0-20200707235045-ab33eee955e0
+	golang.org/x/tools v0.0.0-20200725200936-102e7d357031 // indirect
 )

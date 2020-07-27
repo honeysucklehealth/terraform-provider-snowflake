@@ -195,11 +195,12 @@ func (sb *StageBuilder) Show() string {
 }
 
 type stage struct {
-	Name               *string `db:"name"`
-	DatabaseName       *string `db:"database_name"`
-	SchemaName         *string `db:"schema_name"`
-	Comment            *string `db:"comment"`
-	StorageIntegration *string `db:"storage_integration"`
+	Name                *string `db:"name"`
+	DatabaseName        *string `db:"database_name"`
+	SchemaName          *string `db:"schema_name"`
+	Comment             *string `db:"comment"`
+	NotificationChannel *string `db:"notification_channel"`
+	StorageIntegration  *string `db:"storage_integration"`
 }
 
 func ScanStageShow(row *sqlx.Row) (*stage, error) {
